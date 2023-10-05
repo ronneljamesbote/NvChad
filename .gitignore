@@ -1,5 +1,4 @@
 plugin
-custom
 spell
 ftplugin
 syntax
@@ -7,5 +6,3 @@ coc-settings.json
 .luarc.json
 lazy-lock.json
 after
-!lua/custom/configs/lspconfig.lua
-!lua/custom/configs/overrides.lua
