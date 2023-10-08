@@ -4,7 +4,7 @@ local b = null_ls.builtins
 
 local sources = {
 
-  -- webdev stuff
+  -- Web Dev stuff
   b.formatting.prettier.with {
     filetypes = {
       "javascript",
@@ -27,7 +27,12 @@ local sources = {
     prefer_local = "node_modules/.bin",
   },
 
-  -- Lua
+  -- PHP stuff
+  b.formatting.pint.with {
+    prefer_local = "vendor/bin/pint",
+  },
+
+  -- Lua stuff
   b.formatting.stylua,
 }
 
