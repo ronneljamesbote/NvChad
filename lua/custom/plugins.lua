@@ -1,11 +1,11 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
 
   {
-    'christoomey/vim-tmux-navigator',
-    lazy = false
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
   },
 
   -- Override plugin definition options
@@ -30,12 +30,27 @@ local plugins = {
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = overrides.treesitter,
+    opts = function()
+      local opt = require "plugins.configs.treesitter"
+
+      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+      parser_config.blade = {
+        install_info = {
+          url = "https://github.com/EmranMR/tree-sitter-blade",
+          files = { "src/parser.c" },
+          branch = "main",
+        },
+        filetype = "blade",
+      }
+
+      return opt
+    end,
   },
 
   {
