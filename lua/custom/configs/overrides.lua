@@ -35,7 +35,8 @@ M.mason = {
     "prettier",
 
     -- PHP stuff
-    "phpactor"
+    "phpactor",
+    "pint",
   },
 }
 
