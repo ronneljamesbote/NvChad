@@ -31,6 +31,7 @@ local sources = {
   b.formatting.pint.with {
     prefer_local = "vendor/bin/pint",
   },
+  b.formatting.blade_formatter,
 
   -- Lua stuff
   b.formatting.stylua,

@@ -37,6 +37,7 @@ M.mason = {
     -- PHP stuff
     "phpactor",
     "pint",
+    "blade-formatter",
   },
 }
 
