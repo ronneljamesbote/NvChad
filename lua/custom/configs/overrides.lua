@@ -13,6 +13,7 @@ M.treesitter = {
     "markdown",
     "markdown_inline",
     "php",
+    "sql",
   },
   indent = {
     enable = true,
@@ -38,6 +39,9 @@ M.mason = {
     "phpactor",
     "pint",
     "blade-formatter",
+
+    -- SQL stuff
+    "sql-formatter",
   },
 }
 

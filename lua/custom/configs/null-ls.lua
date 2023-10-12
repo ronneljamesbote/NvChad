@@ -33,6 +33,9 @@ local sources = {
   },
   b.formatting.blade_formatter,
 
+  -- SQL stuff
+  -- b.formatting.sql_formatter,
+
   -- Lua stuff
   b.formatting.stylua,
 }
