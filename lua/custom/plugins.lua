@@ -3,11 +3,6 @@ local overrides = require "custom.configs.overrides"
 ---@type NvPluginSpec[]
 local plugins = {
 
-  {
-    "christoomey/vim-tmux-navigator",
-    lazy = false,
-  },
-
   -- Override plugin definition options
 
   {
@@ -64,6 +59,47 @@ local plugins = {
     event = "InsertEnter",
     config = function()
       require("better_escape").setup()
+    end,
+  },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      { "tpope/vim-dadbod", lazy = false },
+      { "kristijanhusak/vim-dadbod-completion", lazy = false },
+    },
+    cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
+    init = function()
+      vim.g.db_ui_use_nerd_fonts = 1
+    end,
+    -- config from https://github.com/kristijanhusak/vim-dadbod-completion/issues/51
+    config = function()
+      local function db_completion()
+        require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "sql",
+        },
+        command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "sql",
+          "mysql",
+          "plsql",
+        },
+        callback = function()
+          vim.schedule(db_completion)
+        end,
+      })
     end,
   },
 
