@@ -7,11 +7,6 @@ local sources = {
   -- Web Dev stuff
   b.formatting.prettier.with {
     filetypes = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue",
       "css",
       "scss",
       "less",
@@ -26,6 +21,16 @@ local sources = {
     },
     prefer_local = "node_modules/.bin",
   },
+  b.formatting.eslint_d.with {
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "vue",
+    },
+  },
+  b.diagnostics.eslint_d,
 
   -- PHP stuff
   b.formatting.pint.with {

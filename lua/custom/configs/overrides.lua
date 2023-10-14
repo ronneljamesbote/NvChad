@@ -34,6 +34,7 @@ M.mason = {
     "html-lsp",
     "typescript-language-server",
     "prettier",
+    "eslint_d",
 
     -- PHP stuff
     "phpactor",
