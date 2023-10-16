@@ -23,6 +23,7 @@ local plugins = {
   },
 
   -- override plugin configs
+
   {
     "williamboman/mason.nvim",
     opts = overrides.mason,
@@ -54,6 +55,7 @@ local plugins = {
   },
 
   -- Install a plugin
+
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -77,20 +79,6 @@ local plugins = {
       vim.g.db_ui_use_nerd_fonts = 1
     end,
   },
-
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
-
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
 }
 
 return plugins
