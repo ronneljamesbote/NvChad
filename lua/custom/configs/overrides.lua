@@ -17,34 +17,26 @@ M.treesitter = {
   },
   indent = {
     enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 }
 
 M.mason = {
   ensure_installed = {
-    -- lua stuff
+    -- LSPs
     "lua-language-server",
-    "stylua",
-
-    -- web dev stuff
     "css-lsp",
     "html-lsp",
     "typescript-language-server",
-    "prettier",
-    "eslint_d",
     "tailwindcss-language-server",
+    "eslint-lsp",
     "emmet-ls",
-
-    -- PHP stuff
     "phpactor",
+
+    -- Formatters
+    "stylua",
+    "prettier",
     "pint",
     "blade-formatter",
-
-    -- SQL stuff
-    "sql-formatter",
   },
 }
 

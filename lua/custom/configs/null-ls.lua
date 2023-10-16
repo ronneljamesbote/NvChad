@@ -3,56 +3,28 @@ local null_ls = require "null-ls"
 local b = null_ls.builtins
 
 local sources = {
-
-  -- Web Dev stuff
+  -- Formatting
   b.formatting.prettier.with {
-    filetypes = {
-      "css",
-      "scss",
-      "less",
-      "html",
-      "json",
-      "jsonc",
-      "yaml",
-      "markdown",
-      "markdown.mdx",
-      "graphql",
-      "handlebars",
-    },
     prefer_local = "node_modules/.bin",
   },
-  b.formatting.eslint_d.with {
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue",
-    },
-  },
-  b.diagnostics.eslint_d,
 
-  -- PHP stuff
-  b.formatting.pint.with {
-    prefer_local = "vendor/bin/pint",
-  },
   b.formatting.blade_formatter,
 
-  -- SQL stuff
-  -- b.formatting.sql_formatter,
+  b.formatting.pint.with {
+    prefer_local = "vendor/bin",
+  },
 
-  -- Lua stuff
   b.formatting.stylua,
 }
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local lspFormattingAutogroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
   if client.supports_method "textDocument/formatting" then
-    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_clear_autocmds { group = lspFormattingAutogroup, buffer = bufnr }
 
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
+      group = lspFormattingAutogroup,
       buffer = bufnr,
       callback = function()
         vim.lsp.buf.format { async = false }
