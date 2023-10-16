@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "tsserver", "phpactor", "tailwindcss" }
+local servers = { "tsserver", "phpactor", "tailwindcss" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -13,7 +13,28 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+local htmlRelatedServers = { "html", "emmet_ls" }
+
+local htmlFileTypes = {
+  "html",
+  "javascript",
+  "javascriptreact",
+  "typescriptreact",
+  "vue",
+  "blade",
+}
+
+for _, lsp in ipairs(htmlRelatedServers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = htmlFileTypes,
+  }
+end
+
 lspconfig.cssls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
   settings = {
     css = { validate = true, lint = {
       unknownAtRules = "ignore",
@@ -25,4 +46,5 @@ lspconfig.cssls.setup {
       unknownAtRules = "ignore",
     } },
   },
+  filetypes = htmlFileTypes,
 }
