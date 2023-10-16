@@ -36,6 +36,7 @@ M.mason = {
     "prettier",
     "eslint_d",
     "tailwindcss-language-server",
+    "emmet-ls",
 
     -- PHP stuff
     "phpactor",
