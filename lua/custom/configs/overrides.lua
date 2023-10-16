@@ -35,6 +35,7 @@ M.mason = {
     "typescript-language-server",
     "prettier",
     "eslint_d",
+    "tailwindcss-language-server",
 
     -- PHP stuff
     "phpactor",
