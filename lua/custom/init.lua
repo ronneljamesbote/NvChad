@@ -1,16 +1,9 @@
--- local autocmd = vim.api.nvim_create_autocmd
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
--- Auto resize panes when resizing nvim window
--- autocmd("VimResized", {
---   pattern = "*",
---   command = "tabdo wincmd =",
--- })
-
-local bladeFiletypeRelated = vim.api.nvim_create_augroup("BladeFiletypeRelated", { clear = true })
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.blade.php",
-  group = bladeFiletypeRelated,
+  group = augroup("BladeFiletypeRelated", { clear = true }),
   callback = function()
     vim.opt.filetype = "blade"
   end,

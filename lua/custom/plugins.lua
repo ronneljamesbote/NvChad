@@ -1,16 +1,10 @@
-local overrides = require "custom.configs.overrides"
-
----@type NvPluginSpec[]
 local plugins = {
-
-  -- Override plugin definition options
-
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      -- format & linting
       {
         "jose-elias-alvarez/null-ls.nvim",
+        event = "VeryLazy",
         config = function()
           require "custom.configs.null-ls"
         end,
@@ -19,21 +13,35 @@ local plugins = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
+    end,
   },
-
-  -- override plugin configs
 
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason,
+    opts = {
+      ensure_installed = {
+        -- LSPs
+        "lua-language-server",
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "tailwindcss-language-server",
+        "eslint-lsp",
+        "emmet-ls",
+        "phpactor",
+
+        -- Formatters
+        "stylua",
+        "prettier",
+        "pint",
+        "blade-formatter",
+      },
+    },
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function()
-      local opt = require "plugins.configs.treesitter"
-
       local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
       parser_config.blade = {
@@ -45,16 +53,49 @@ local plugins = {
         filetype = "blade",
       }
 
-      return opt
+      return {
+        ensure_installed = {
+          "vim",
+          "lua",
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "tsx",
+          "markdown",
+          "markdown_inline",
+          "php",
+          "sql",
+        },
+        highlight = {
+          enable = true,
+          use_languagetree = true,
+        },
+        indent = { enable = true },
+      }
     end,
   },
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+    opts = {
+      git = {
+        enable = true,
+      },
+      filters = {
+        dotfiles = false,
+        git_ignored = false,
+      },
+      renderer = {
+        highlight_git = true,
+        icons = {
+          show = {
+            git = true,
+          },
+        },
+      },
+    },
   },
-
-  -- Install a plugin
 
   {
     "max397574/better-escape.nvim",
