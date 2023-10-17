@@ -111,6 +111,14 @@ local plugins = {
   },
 
   {
+    "mbbill/undotree",
+    lazy = false,
+    config = function()
+      vim.g.undotree_SetFocusWhenToggle = 1
+    end,
+  },
+
+  {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
       { "tpope/vim-dadbod", lazy = false },
