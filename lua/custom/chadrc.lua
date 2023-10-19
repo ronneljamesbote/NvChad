@@ -28,6 +28,7 @@ local function fileInfo()
   return "%#StText# " .. icon .. " " .. project_path .. " "
 end
 
+---@type ChadrcConfig
 local M = {}
 
 local highlights = require "custom.highlights"
