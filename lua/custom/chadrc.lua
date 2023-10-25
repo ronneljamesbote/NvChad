@@ -35,6 +35,7 @@ local highlights = require "custom.highlights"
 
 M.ui = {
   theme = "onedark",
+  transparency = true,
   statusline = {
     theme = "vscode_colored",
     overriden_modules = function(modules)
