@@ -8,3 +8,5 @@ autocmd({ "BufNewFile", "BufRead" }, {
     vim.opt.filetype = "blade"
   end,
 })
+
+vim.opt.colorcolumn = "120"
