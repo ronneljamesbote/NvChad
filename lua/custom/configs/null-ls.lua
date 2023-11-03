@@ -29,7 +29,7 @@ local on_attach = function(client, bufnr)
       group = lspFormattingAugroup,
       buffer = bufnr,
       callback = function()
-        vim.lsp.buf.format { async = false }
+        vim.lsp.buf.format { async = false, timeout_ms = 5000 }
       end,
     })
   end
