@@ -6,11 +6,12 @@ local null_ls = require "null-ls"
 local builtins = null_ls.builtins
 
 local sources = {
+  builtins.formatting.blade_formatter,
+
   builtins.formatting.prettier.with {
     prefer_local = "node_modules/.bin",
+    extra_filetypes = { "blade" },
   },
-
-  builtins.formatting.blade_formatter,
 
   builtins.formatting.pint.with {
     prefer_local = "vendor/bin",
