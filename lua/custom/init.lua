@@ -10,3 +10,7 @@ autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 vim.opt.colorcolumn = "120"
+
+vim.opt.foldmethod = "manual"
+
+vim.opt.foldenable = false
