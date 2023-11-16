@@ -18,6 +18,8 @@ local sources = {
   },
 
   builtins.formatting.stylua,
+
+  builtins.diagnostics.phpstan,
 }
 
 local lspFormattingAugroup = augroup("LspFormatting", {})
