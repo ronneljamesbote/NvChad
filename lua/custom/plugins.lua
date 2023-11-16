@@ -148,6 +148,17 @@ local plugins = {
   },
 
   {
+    "folke/trouble.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false,
+    opts = {
+      mode = "document_diagnostics",
+    },
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
     lazy = false,
     dependencies = {
