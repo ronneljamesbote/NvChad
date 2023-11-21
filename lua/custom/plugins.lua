@@ -35,6 +35,9 @@ local plugins = {
         "prettier",
         "pint",
         "blade-formatter",
+
+        -- Diagnostics
+        "phpstan",
       },
     },
   },
