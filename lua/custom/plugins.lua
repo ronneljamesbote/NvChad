@@ -18,28 +18,7 @@ local plugins = {
 
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        -- LSPs
-        "lua-language-server",
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "tailwindcss-language-server",
-        "eslint-lsp",
-        "emmet-ls",
-        "phpactor",
-
-        -- Formatters
-        "stylua",
-        "prettier",
-        "pint",
-        "blade-formatter",
-
-        -- Diagnostics
-        "phpstan",
-      },
-    },
+    opts = require "custom.configs.mason",
   },
 
   {
@@ -69,6 +48,8 @@ local plugins = {
           "markdown_inline",
           "php",
           "sql",
+          "python",
+          "blade",
         },
         highlight = {
           enable = true,
