@@ -16,10 +16,12 @@ local required_installed = {
     "stylua",
     "prettier",
   },
+
   lua = {
     -- LSP
     "lua-language-server",
   },
+
   php = {
     -- LSP
     "phpactor",
@@ -30,7 +32,11 @@ local required_installed = {
     -- Formatters
     "pint",
     "blade-formatter",
+
+    -- Debuggers
+    "php-debug-adapter",
   },
+
   python = {
     -- LSP
     "pyright",

@@ -18,4 +18,26 @@ M.general = {
   },
 }
 
+M.dap = {
+  plugin = true,
+  n = {
+    ["<F5>"] = {
+      function()
+        require("dap").continue()
+      end,
+      "Start debugging session",
+    },
+    ["<leader>Bb"] = {
+      "<cmd> DapToggleBreakpoint <CR>",
+      "Add breakpoint at line",
+    },
+    ["<leader>Bg"] = {
+      function()
+        require("dapui").toggle()
+      end,
+      "Open debugger window",
+    },
+  },
+}
+
 return M

@@ -1,5 +1,51 @@
 local plugins = {
   {
+    "mfussenegger/nvim-dap",
+    lazy = false,
+    init = function()
+      require("core.utils").load_mappings "dap"
+    end,
+    config = function()
+      local dap = require "dap"
+
+      dap.adapters.php = {
+        type = "executable",
+        command = "node",
+        args = { vim.fn.stdpath "data" .. "/mason/packages/php-debug-adapter/extension/out/phpDebug.js" },
+      }
+
+      dap.configurations.php = {
+        {
+          type = "php",
+          request = "launch",
+          name = "Listen for Xdebug (Laravel Sail)",
+          port = 9003,
+          hostname = "127.0.0.1",
+          pathMappings = {
+            ["/var/www/html"] = "${workspaceFolder}",
+          },
+        },
+      }
+    end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    lazy = false,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require("dapui").setup()
+    end,
+  },
+
+  {
+    "williamboman/mason.nvim",
+    opts = require "custom.configs.mason",
+  },
+
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       {
@@ -14,11 +60,6 @@ local plugins = {
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end,
-  },
-
-  {
-    "williamboman/mason.nvim",
-    opts = require "custom.configs.mason",
   },
 
   {
@@ -37,19 +78,36 @@ local plugins = {
 
       return {
         ensure_installed = {
-          "vim",
-          "lua",
+          -- Web
           "html",
           "css",
+          "scss",
+
+          -- Programming languages
+          "php",
           "javascript",
           "typescript",
+          "python",
+          "go",
+          "java",
+          "rust",
+          "vim",
+          "lua",
+          "sql",
+
+          -- Templates
+          "blade",
+          "twig",
+
+          -- Filetypes
           "tsx",
+          "vue",
+
+          -- Others
+          "json",
           "markdown",
           "markdown_inline",
-          "php",
-          "sql",
-          "python",
-          "blade",
+          "yaml",
         },
         highlight = {
           enable = true,
