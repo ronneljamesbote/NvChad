@@ -51,5 +51,7 @@ local required_installed = {
 }
 
 return {
-  ensure_installed = flatten_tables(required_installed),
+  opts = {
+    ensure_installed = flatten_tables(required_installed),
+  },
 }

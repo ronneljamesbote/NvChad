@@ -1,4 +1,5 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
+
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
@@ -77,28 +78,34 @@ local server_configs = {
   },
 }
 
-local servers = flatten_tables(server_configs)
+return {
+  config = function()
+    require "plugins.configs.lspconfig"
 
-for _, lsp in ipairs(servers) do
-  local config = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+    local servers = flatten_tables(server_configs)
 
-  if lsp.filetypes then
-    config.filetypes = lsp.filetypes
-  end
+    for _, lsp in ipairs(servers) do
+      local config = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
-  if lsp.settings then
-    config.settings = lsp.settings
-  end
+      if lsp.filetypes then
+        config.filetypes = lsp.filetypes
+      end
 
-  if lsp.on_attach then
-    config.on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      lsp.on_attach(client, bufnr)
+      if lsp.settings then
+        config.settings = lsp.settings
+      end
+
+      if lsp.on_attach then
+        config.on_attach = function(client, bufnr)
+          on_attach(client, bufnr)
+          lsp.on_attach(client, bufnr)
+        end
+      end
+
+      lspconfig[lsp.server].setup(config)
     end
-  end
-
-  lspconfig[lsp.server].setup(config)
-end
+  end,
+}
