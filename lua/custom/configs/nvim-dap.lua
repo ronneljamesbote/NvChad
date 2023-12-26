@@ -1,18 +1,11 @@
-return {
-  init = function()
-    require("core.utils").load_mappings "dap"
-  end,
-
-  config = function()
-    local dap = require "dap"
-
-    dap.adapters.php = {
+local dap_settings = {
+  php = {
+    adapter = {
       type = "executable",
       command = "node",
       args = { vim.fn.stdpath "data" .. "/mason/packages/php-debug-adapter/extension/out/phpDebug.js" },
-    }
-
-    dap.configurations.php = {
+    },
+    configurations = {
       {
         type = "php",
         request = "launch",
@@ -23,6 +16,26 @@ return {
           ["/var/www/html"] = "${workspaceFolder}",
         },
       },
-    }
+    },
+  },
+}
+
+local setup = function(settings)
+  local dap = require "dap"
+
+  for key, opt in pairs(settings) do
+    dap.adapters[key] = opt.adapter
+
+    dap.configurations[key] = opt.configurations
+  end
+end
+
+return {
+  init = function()
+    require("core.utils").load_mappings "dap"
+  end,
+
+  config = function()
+    setup(dap_settings)
   end,
 }
