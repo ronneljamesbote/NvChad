@@ -5,21 +5,19 @@ local required_installed = {
     -- LSP
     "css-lsp",
     "html-lsp",
-    "typescript-language-server",
-    "tailwindcss-language-server",
     "emmet-ls",
-
-    -- Linters
-    "eslint-lsp",
+    "tailwindcss-language-server",
 
     -- Formatters
-    "stylua",
     "prettier",
   },
 
   lua = {
     -- LSP
     "lua-language-server",
+
+    -- Formatters
+    "stylua",
   },
 
   php = {
@@ -31,10 +29,29 @@ local required_installed = {
 
     -- Formatters
     "pint",
-    "blade-formatter",
 
     -- Debuggers
     "php-debug-adapter",
+  },
+
+  javascript = {
+    -- LSP
+    "typescript-language-server",
+
+    -- Linters
+    "eslint-lsp",
+  },
+
+  go = {
+    -- LSP
+    "gopls",
+
+    -- Formatters
+    "gofumpt",
+    "goimports-reviser",
+
+    -- Debuggers
+    "delve",
   },
 
   python = {

@@ -4,26 +4,20 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 
-local flatten_tables = require "custom.helpers.flatten_tables"
+local util = require "lspconfig/util"
 
 local server_configs = {
   web = {
-    {
-      server = "tsserver",
+    html = {
+      filetypes = { "html", "javascriptreact", "typescriptreact", "vue" },
     },
-
-    {
-      server = "html",
+    emmet_ls = {
       filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade" },
     },
-
-    {
-      server = "emmet_ls",
+    tailwindcss = {
       filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade" },
     },
-
-    {
-      server = "cssls",
+    cssls = {
       settings = {
         css = {
           validate = true,
@@ -45,14 +39,11 @@ local server_configs = {
         },
       },
     },
+  },
 
-    {
-      server = "tailwindcss",
-      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade" },
-    },
-
-    {
-      server = "eslint",
+  javascript = {
+    tsserver = {},
+    eslint = {
       filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade", "javascript", "typescript" },
       settings = {
         codeActionOnSave = {
@@ -69,43 +60,57 @@ local server_configs = {
     },
   },
 
+  go = {
+    gopls = {
+      cmd = { "gopls" },
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+          },
+        },
+      },
+    },
+  },
+
   php = {
-    { server = "phpactor" },
+    phpactor = {},
   },
 
   python = {
-    { server = "pyright" },
+    pyright = {},
   },
 }
+
+local configure = function(opts)
+  local config = opts
+
+  config.capabilities = capabilities
+
+  if opts.on_attach then
+    config.on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+      opts.on_attach(client, bufnr)
+    end
+  end
+
+  return config
+end
 
 return {
   config = function()
     require "plugins.configs.lspconfig"
 
-    local servers = flatten_tables(server_configs)
+    for _, language in pairs(server_configs) do
+      for name, server in pairs(language) do
+        local config = configure(server)
 
-    for _, lsp in ipairs(servers) do
-      local config = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
-
-      if lsp.filetypes then
-        config.filetypes = lsp.filetypes
+        lspconfig[name].setup(config)
       end
-
-      if lsp.settings then
-        config.settings = lsp.settings
-      end
-
-      if lsp.on_attach then
-        config.on_attach = function(client, bufnr)
-          on_attach(client, bufnr)
-          lsp.on_attach(client, bufnr)
-        end
-      end
-
-      lspconfig[lsp.server].setup(config)
     end
   end,
 }

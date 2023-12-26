@@ -39,11 +39,15 @@ return {
       },
 
       php = {
-        builtins.formatting.blade_formatter,
         builtins.formatting.pint.with {
           prefer_local = "vendor/bin",
         },
         builtins.diagnostics.phpstan,
+      },
+
+      go = {
+        builtins.formatting.gofumpt,
+        builtins.formatting.goimports_reviser,
       },
 
       python = {
