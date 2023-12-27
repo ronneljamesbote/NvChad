@@ -90,6 +90,7 @@ local configure = function(opts)
   local config = opts
 
   config.capabilities = capabilities
+  config.on_attach = on_attach
 
   if opts.on_attach then
     config.on_attach = function(client, bufnr)
