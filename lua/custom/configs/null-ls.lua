@@ -1,20 +1,16 @@
 local flatten_tables = require "custom.helpers.flatten_tables"
 
-local autocmd = vim.api.nvim_create_autocmd
-
-local augroup = vim.api.nvim_create_augroup
+local formattingAugroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 return {
   config = function()
     local null_ls = require "null-ls"
 
     local on_attach = function(client, bufnr)
-      local formattingAugroup = augroup("LspFormatting", {})
-
       if client.supports_method "textDocument/formatting" then
         vim.api.nvim_clear_autocmds { group = formattingAugroup, buffer = bufnr }
 
-        autocmd("BufWritePre", {
+        vim.api.nvim_create_autocmd("BufWritePre", {
           group = formattingAugroup,
           buffer = bufnr,
           callback = function()
