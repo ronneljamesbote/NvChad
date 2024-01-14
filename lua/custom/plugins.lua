@@ -21,7 +21,7 @@ local plugins = {
   },
 
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "VeryLazy",
     config = require("custom.configs.null-ls").config,
   },
@@ -29,7 +29,7 @@ local plugins = {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
     },
     config = require("custom.configs.lspconfig").config,
   },
