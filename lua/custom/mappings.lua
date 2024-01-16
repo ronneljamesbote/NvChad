@@ -12,6 +12,22 @@ M.general = {
       end,
       "Live grep hidden files",
     },
+    ["<leader>fm"] = {
+      function()
+        vim.lsp.buf.format {
+          async = false,
+          timeout_ms = 30000,
+          filter = function(lspClient)
+            if lspClient.name == "tsserver" then
+              return false
+            end
+
+            return true
+          end,
+        }
+      end,
+      "LSP formatting",
+    },
   },
   v = {
     [">"] = { ">gv", "indent" },
