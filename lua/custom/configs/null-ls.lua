@@ -14,7 +14,17 @@ return {
           group = formattingAugroup,
           buffer = bufnr,
           callback = function()
-            vim.lsp.buf.format { async = false, timeout_ms = 30000 }
+            vim.lsp.buf.format {
+              async = false,
+              timeout_ms = 30000,
+              filter = function(lspClient)
+                if lspClient.name == "tsserver" then
+                  return false
+                end
+
+                return true
+              end,
+            }
           end,
         })
       end
