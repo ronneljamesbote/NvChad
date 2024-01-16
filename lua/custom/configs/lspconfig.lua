@@ -51,11 +51,11 @@ local server_configs = {
           mode = "all",
         },
       },
-      on_attach = function(_, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          buffer = bufnr,
-          command = "EslintFixAll",
-        })
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+
+        client.server_capabilities.documentFormattingProvider = true
+        client.server_capabilities.documentRangeFormattingProvider = true
       end,
     },
   },
@@ -87,19 +87,13 @@ local server_configs = {
 }
 
 local configure = function(opts)
-  local config = opts
-
-  config.capabilities = capabilities
-  config.on_attach = on_attach
-
-  if opts.on_attach then
-    config.on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-      opts.on_attach(client, bufnr)
-    end
+  if opts.on_attach == nil then
+    opts.on_attach = on_attach
   end
 
-  return config
+  opts.capabilities = capabilities
+
+  return opts
 end
 
 return {
