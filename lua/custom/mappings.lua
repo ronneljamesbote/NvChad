@@ -1,3 +1,5 @@
+local format_file = require "custom.helpers.format_file"
+
 local M = {}
 
 M.general = {
@@ -13,19 +15,7 @@ M.general = {
       "Live grep hidden files",
     },
     ["<leader>fm"] = {
-      function()
-        vim.lsp.buf.format {
-          async = false,
-          timeout_ms = 30000,
-          filter = function(lspClient)
-            if lspClient.name == "tsserver" then
-              return false
-            end
-
-            return true
-          end,
-        }
-      end,
+      format_file,
       "LSP formatting",
     },
   },

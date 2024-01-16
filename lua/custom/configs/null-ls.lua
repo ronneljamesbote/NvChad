@@ -1,34 +1,11 @@
 local flatten_tables = require "custom.helpers.flatten_tables"
+local format_file = require "custom.helpers.format_file"
 
 local formattingAugroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 return {
   config = function()
     local null_ls = require "null-ls"
-
-    local on_attach = function(client, bufnr)
-      if client.supports_method "textDocument/formatting" then
-        vim.api.nvim_clear_autocmds { group = formattingAugroup, buffer = bufnr }
-
-        vim.api.nvim_create_autocmd("BufWritePre", {
-          group = formattingAugroup,
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format {
-              async = false,
-              timeout_ms = 30000,
-              filter = function(lspClient)
-                if lspClient.name == "tsserver" then
-                  return false
-                end
-
-                return true
-              end,
-            }
-          end,
-        })
-      end
-    end
 
     local builtins = null_ls.builtins
 
@@ -64,9 +41,19 @@ return {
     }
 
     null_ls.setup {
-      sources = flatten_tables(required_sources),
-      on_attach = on_attach,
       debug = true,
+      sources = flatten_tables(required_sources),
+      on_attach = function(client, bufnr)
+        if client.supports_method "textDocument/formatting" then
+          vim.api.nvim_clear_autocmds { group = formattingAugroup, buffer = bufnr }
+
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = formattingAugroup,
+            buffer = bufnr,
+            callback = format_file,
+          })
+        end
+      end,
     }
   end,
 }
