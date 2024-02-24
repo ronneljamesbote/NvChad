@@ -36,7 +36,6 @@ return {
       python = {
         builtins.formatting.black,
         builtins.diagnostics.mypy,
-        builtins.diagnostics.ruff,
       },
     }
 

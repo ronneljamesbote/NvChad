@@ -82,7 +82,22 @@ local server_configs = {
   },
 
   python = {
-    pyright = {},
+    pyright = {
+      settings = {
+        pyright = {
+          -- Using Ruff's import organizer
+          disableOrganizeImports = true,
+        },
+      },
+    },
+    ruff_lsp = {
+      on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+      end,
+    },
   },
 }
 

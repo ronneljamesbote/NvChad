@@ -57,13 +57,13 @@ local required_installed = {
   python = {
     -- LSP
     "pyright",
+    "ruff-lsp",
 
     -- Diagnostics
     "black",
 
     -- Linters
     "mypy",
-    "ruff",
   },
 }
 
