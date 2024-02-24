@@ -113,8 +113,6 @@ end
 
 return {
   config = function()
-    require "plugins.configs.lspconfig"
-
     for _, language in pairs(server_configs) do
       for name, server in pairs(language) do
         local config = configure(server)
