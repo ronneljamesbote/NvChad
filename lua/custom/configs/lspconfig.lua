@@ -78,7 +78,9 @@ local server_configs = {
   },
 
   php = {
-    phpactor = {},
+    phpactor = {
+      cmd = { "phpactor", "language-server", "-vvv" },
+    },
   },
 
   python = {
