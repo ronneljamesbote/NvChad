@@ -65,6 +65,10 @@ local required_installed = {
     -- Linters
     "mypy",
   },
+
+  extra = {
+    "marksman",
+  },
 }
 
 return {

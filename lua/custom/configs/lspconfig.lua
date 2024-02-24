@@ -101,6 +101,10 @@ local server_configs = {
       end,
     },
   },
+
+  extra = {
+    marksman = {},
+  },
 }
 
 local configure = function(opts)
