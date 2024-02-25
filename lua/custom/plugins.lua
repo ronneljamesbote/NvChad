@@ -42,6 +42,7 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
     lazy = false,
+    commit = "19a91a38b02c1c28c14e0ba468d20ae1423c39b2",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
     },
