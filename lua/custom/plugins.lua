@@ -1,19 +1,4 @@
 local plugins = {
-  {
-    "mfussenegger/nvim-dap",
-    lazy = false,
-    init = require("custom.configs.nvim-dap").init,
-    config = require("custom.configs.nvim-dap").config,
-  },
-
-  {
-    "rcarriga/nvim-dap-ui",
-    lazy = false,
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    config = require("custom.configs.nvim-dap-ui").config,
-  },
 
   {
     "williamboman/mason.nvim",
@@ -50,20 +35,6 @@ local plugins = {
   },
 
   {
-    "tpope/vim-dadbod",
-    lazy = false,
-  },
-
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      "tpope/vim-dadbod",
-    },
-    cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
-    init = require("custom.configs.vim-dadbod-ui").init,
-  },
-
-  {
     "nvim-tree/nvim-tree.lua",
     opts = require("custom.configs.nvim-tree").opts,
   },
@@ -91,11 +62,38 @@ local plugins = {
 
   {
     "folke/trouble.nvim",
+    lazy = false,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    lazy = false,
     opts = require("custom.configs.trouble").opts,
+  },
+
+  {
+    "tpope/vim-dadbod",
+  },
+
+  {
+    "kristijanhusak/vim-dadbod-ui",
+    dependencies = {
+      "tpope/vim-dadbod",
+    },
+    cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer", "DBUIRenameBuffer", "DBUILastQueryInfo" },
+    init = require("custom.configs.vim-dadbod-ui").init,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    init = require("custom.configs.nvim-dap").init,
+    config = require("custom.configs.nvim-dap").config,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    config = require("custom.configs.nvim-dap-ui").config,
   },
 }
 
