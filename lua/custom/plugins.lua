@@ -91,6 +91,7 @@ local plugins = {
     "rcarriga/nvim-dap-ui",
     dependencies = {
       "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
     },
     config = require("custom.configs.nvim-dap-ui").config,
   },
