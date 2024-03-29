@@ -9,6 +9,14 @@ autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
+autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.templ",
+  group = augroup("TemplFiletypeRelated", { clear = true }),
+  callback = function()
+    vim.opt.filetype = "templ"
+  end,
+})
+
 vim.opt.colorcolumn = "120"
 
 vim.opt.foldmethod = "manual"

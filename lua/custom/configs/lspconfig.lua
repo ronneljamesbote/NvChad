@@ -9,13 +9,14 @@ local util = require "lspconfig/util"
 local server_configs = {
   web = {
     html = {
-      filetypes = { "html", "javascriptreact", "typescriptreact", "vue" },
+      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "templ" },
     },
     emmet_ls = {
-      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade" },
+      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade", "templ" },
     },
     tailwindcss = {
-      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade" },
+      filetypes = { "html", "javascriptreact", "typescriptreact", "vue", "blade", "templ" },
+      init_options = { userLanguages = { templ = "html" } },
     },
     cssls = {
       settings = {
@@ -61,6 +62,7 @@ local server_configs = {
   },
 
   go = {
+    templ = {},
     gopls = {
       cmd = { "gopls" },
       filetypes = { "go", "gomod", "gowork", "gotmpl" },

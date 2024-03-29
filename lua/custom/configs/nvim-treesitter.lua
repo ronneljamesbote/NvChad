@@ -24,6 +24,7 @@ local ensure_installed = {
   templates = {
     "blade",
     "twig",
+    "templ",
   },
 
   files = {
