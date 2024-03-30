@@ -52,6 +52,9 @@ local required_installed = {
 
     -- Debuggers
     "delve",
+
+    -- Templating
+    "templ",
   },
 
   python = {
